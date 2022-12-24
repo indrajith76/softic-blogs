@@ -20,7 +20,7 @@ export default function Home() {
       </Head>
       {isLoading && <h3>Loading</h3>}
       {error && <h3>{error}</h3>}
-      <section className="container mx-auto grid grid-cols-4 gap-5">
+      <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 px-5 lg:grid-cols-4 gap-5">
         {posts &&
           posts.map((post) => <PostCard key={post.id} post={post}></PostCard>)}
       </section>
