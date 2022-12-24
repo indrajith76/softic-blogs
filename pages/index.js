@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "../slices/postSlice";
-import Link from "next/link";
+import PostCard from "../components/PostCard";
 
 export default function Home() {
   const { isLoading, posts, error } = useSelector((state) => state.posts);
@@ -20,15 +20,9 @@ export default function Home() {
       </Head>
       {isLoading && <h3>Loading</h3>}
       {error && <h3>{error}</h3>}
-      <section>
+      <section className="container mx-auto grid grid-cols-4 gap-5">
         {posts &&
-          posts.map((post) => (
-            <article key={post.id}>
-              <Link href={`/post/${post.id}`}>
-                <h5>{post.title}</h5>
-              </Link>
-            </article>
-          ))}
+          posts.map((post) => <PostCard key={post.id} post={post}></PostCard>)}
       </section>
     </>
   );

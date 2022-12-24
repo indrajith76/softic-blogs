@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComments } from "../../slices/commentSlice";
+import { useRouter } from "next/router";
 
 const postId = () => {
+  const router = useRouter();
+  const id = router.query.postId;
   const { isLoading, comments, error } = useSelector((state) => state.comments);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchComments(1));
+    dispatch(fetchComments(id));
   }, []);
 
   return (
@@ -20,7 +23,7 @@ const postId = () => {
         {comments &&
           comments.map((comment) => (
             <article key={comment.id}>
-                <h5>{comment.name}</h5>
+              <h5>{comment.name}</h5>
             </article>
           ))}
       </section>
