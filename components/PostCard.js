@@ -30,6 +30,14 @@ const PostCard = (props) => {
     }
   }, []);
 
+  const deleteHandler = (id) => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <article className="border p-4 rounded-md hover:shadow-lg">
       <img
@@ -55,7 +63,7 @@ const PostCard = (props) => {
           <img src={authorImg} className="w-11 rounded-full" alt="" />
           <div>
             <h6 className="font-semibold">{author.name}</h6>
-            <p>{author.website}</p>
+            <small>{author.website}</small>
           </div>
         </div>
         <div className="flex flex-col items-center gap-1">
@@ -63,7 +71,10 @@ const PostCard = (props) => {
             <span className="text-slate-600">{commentCount}</span>
             <BiCommentDetail className="text-slate-600" />
           </div>
-          <button className="border p-1 border-gray-300 hover:border-red-200 hover:bg-red-200 text-gray-500 hover:text-red-500 rounded-full duration-500">
+          <button
+            onClick={() => deleteHandler(id)}
+            className="border p-1 border-gray-300 hover:border-red-200 hover:bg-red-200 text-gray-500 hover:text-red-500 rounded-full duration-500"
+          >
             <BiTrash className="" />
           </button>
         </div>
