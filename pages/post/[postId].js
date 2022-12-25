@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComments } from "../../slices/commentSlice";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
 
 const postId = (props) => {
   const { isLoading, comments, error } = useSelector((state) => state.comments);
@@ -27,7 +28,7 @@ const postId = (props) => {
 
   return (
     <section className="md:w-3/4 lg:w-2/5 mx-auto my-5 px-2 md:px-0">
-      {isLoading && <h3>Loading</h3>}
+      {isLoading && <ClipLoader color="" loading={isLoading} size={50} />}
       {error && <h3>{error}</h3>}
       <div>
         <h1 className="md:text-2xl font-semibold text-slate-800 mb-1">
